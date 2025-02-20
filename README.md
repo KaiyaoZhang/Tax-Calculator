@@ -23,6 +23,7 @@ This is a sample React application built with TypeScript for calculating the fed
 - Internationalization: i18n
 - API fetching: Axios
 - Unit Test: Jest, React-Testing-Lib
+- Auto Testing: Added Husky and github workflow for auto testing 
 
 ## Installation
 
