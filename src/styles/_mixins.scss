@@ -1,0 +1,20 @@
+//mobile devices
+@mixin mob-breakpoint {
+  @media (min-width: 320px) and (max-width: 767px) {
+    @content;
+  }
+}
+
+//tablet devices
+@mixin tablet-breakpoint {
+  @media (min-width: 768px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+//pc devices
+@mixin pc-breakpoint {
+  @media (min-width: 1205px) {
+    @content;
+  }
+}

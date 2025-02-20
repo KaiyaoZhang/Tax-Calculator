@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tax display page it should show the proper page when have taxBrackets and annualIncome value 1`] = `
+<div>
+  <div>
+    <h3
+      class="ant-typography css-dev-only-do-not-override-19lec04"
+    >
+      Tax Breakdown table:
+    </h3>
+    <div
+      class="ant-table-wrapper css-dev-only-do-not-override-19lec04"
+    >
+      <div
+        class="ant-spin-nested-loading css-dev-only-do-not-override-19lec04"
+      >
+        <div
+          class="ant-spin-container"
+        >
+          <div
+            class="ant-table ant-table-bordered css-dev-only-do-not-override-19lec04"
+          >
+            <div
+              class="ant-table-container"
+            >
+              <div
+                class="ant-table-content"
+              >
+                <table
+                  style="table-layout: auto;"
+                >
+                  <colgroup />
+                  <thead
+                    class="ant-table-thead"
+                  >
+                    <tr>
+                      <th
+                        class="ant-table-cell"
+                        scope="col"
+                      >
+                        Income Range
+                      </th>
+                      <th
+                        class="ant-table-cell"
+                        scope="col"
+                      >
+                        Tax Rate
+                      </th>
+                      <th
+                        class="ant-table-cell"
+                        scope="col"
+                      >
+                        Tax Owed
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="ant-table-tbody"
+                  >
+                    <tr
+                      class="ant-table-row ant-table-row-level-0"
+                      data-row-key="0"
+                    >
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $0.00 - $48,535.00
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        15.0%
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $7,280.25
+                      </td>
+                    </tr>
+                    <tr
+                      class="ant-table-row ant-table-row-level-0"
+                      data-row-key="1"
+                    >
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $48,535.00 - $97,069.00
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        20.5%
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $9,949.47
+                      </td>
+                    </tr>
+                    <tr
+                      class="ant-table-row ant-table-row-level-0"
+                      data-row-key="2"
+                    >
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $97,069.00 - $150,473.00
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        26.0%
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $13,885.04
+                      </td>
+                    </tr>
+                    <tr
+                      class="ant-table-row ant-table-row-level-0"
+                      data-row-key="3"
+                    >
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $150,473.00 - $214,368.00
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        29.0%
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $18,529.55
+                      </td>
+                    </tr>
+                    <tr
+                      class="ant-table-row ant-table-row-level-0"
+                      data-row-key="4"
+                    >
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $214,368.00 - ∞
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        33.0%
+                      </td>
+                      <td
+                        class="ant-table-cell"
+                      >
+                        $11,758.56
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3
+      class="ant-typography css-dev-only-do-not-override-19lec04"
+    >
+      Total Taxes: $61,402.87
+    </h3>
+    <h3
+      class="ant-typography css-dev-only-do-not-override-19lec04"
+    >
+      Effective Rate: 24.56%
+    </h3>
+  </div>
+</div>
+`;

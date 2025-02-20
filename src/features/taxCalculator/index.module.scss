@@ -1,0 +1,44 @@
+@use "../../styles/mixins" as m;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  .title {
+    text-align: center;
+  }
+  .form {
+    .formSelect {
+      :global {
+        .ant-select-selector {
+          width: 140px;
+        }
+      }
+    }
+  }
+}
+
+//handle the tax calculator page on mobile view
+@include m.mob-breakpoint {
+  .container {
+    width: 100%;
+    .form {
+      width: 100%;
+      :global {
+        .ant-form {
+          flex-direction: column;
+          gap: 14px;
+          .ant-form-item {
+            margin-right: 0px;
+            .ant-row {
+              flex-direction: column;
+              .ant-btn {
+                float: right;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
