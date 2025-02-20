@@ -35,7 +35,7 @@ This is a sample React application built with TypeScript for calculating the fed
 2. **Install dependencies:**
 
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
    Or
