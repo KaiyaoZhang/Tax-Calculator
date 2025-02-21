@@ -1,10 +1,4 @@
-import {
-  useMemo,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  JSX,
-} from "react";
+import { useMemo, Dispatch, SetStateAction, useCallback, JSX } from "react";
 import { Button, Form, Input, Select, notification } from "antd";
 import type { FormProps } from "antd";
 import { useTranslation } from "react-i18next";
@@ -36,26 +30,34 @@ const SalaryInputForm = ({
     []
   );
 
-  const incomeInputRules = useMemo(
-    () => [
-      { required: true, message: t("income_validate_empty") },
-      { pattern: /^\d+(\.\d{1,2})?$/, message: t("income_validate_number") },
-      {
-        validator: (_: unknown, value: string) => {
-          if (!value || parseFloat(value) > 0) {
-            return Promise.resolve();
-          }
-          return Promise.reject(
-            new Error(t("income_validate_greater_than_zero"))
-          );
-        },
-      },
-    ],
-    [t]
-  );
+ const incomeInputRules = useMemo(
+   () => [
+     {
+       required: true,
+       message: t("income_validate_empty"), // Validation: Field cannot be empty
+     },
+     {
+       pattern: /^\d+(\.\d{1,2})?$/,
+       message: t("income_validate_number"), // Validation: Must be a valid number (up to two decimal places)
+     },
+     {
+       validator: (_: unknown, value: string) => {
+         if (!value || parseFloat(value) > 0) {
+           return Promise.resolve();
+         }
+         return Promise.reject(
+           new Error(t("income_validate_greater_than_zero"))
+         );
+       },
+       // Validation: Must be greater than 0
+     },
+   ],
+   [t]
+ );
+
 
   const yearSelectRules = useMemo(
-    () => [{ required: true, message: t("year_validate_empty") }],
+    () => [{ required: true, message: t("year_validate_empty") }], // Validation: Tax year cannot be empty
     [t]
   );
 
@@ -72,7 +74,7 @@ const SalaryInputForm = ({
           }
         }
       } catch (e) {
-        //handle the API error
+        //Handle the API error
         api["error"]({
           message: t("notification"),
           description: t("APIError"),
