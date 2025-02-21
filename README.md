@@ -58,6 +58,24 @@ This is a sample React application built with TypeScript for calculating the fed
 
 The app will run at [`http://localhost:3000/`](http://localhost:3000/).
 
+## Folder Structure
+
+```
+src
+├── apis                # api call setup including Axios instance setup
+├── features            # all the feature pages inside it
+    -taxCalculator
+        -__test__       # Unit tests for tax Calculator
+        -components     # tax calculator components
+        -index.module.scss # tax calculator styles
+        -index.tsx      # tax calculator index page
+        -types.ts       # types used inside tax calculator
+├── styles              # Gloabl styles like responsive breakpoints
+├── testWrappers        # Unit test wrapper functions
+├── App.tsx             # Root component
+└── index.tsx           # Entry point
+```
+
 ## Testing
 
 To run tests:

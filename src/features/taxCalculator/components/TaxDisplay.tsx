@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { JSX, useMemo } from "react";
 import { Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,10 @@ interface TaxDisplayProps {
   annualIncome: string;
 }
 
-const TaxDisplay = ({ taxBrackets, annualIncome }: TaxDisplayProps) => {
+const TaxDisplay = ({
+  taxBrackets,
+  annualIncome,
+}: TaxDisplayProps): JSX.Element | null => {
   const { Title } = Typography;
   const { t } = useTranslation();
 
@@ -43,9 +46,10 @@ const TaxDisplay = ({ taxBrackets, annualIncome }: TaxDisplayProps) => {
     []
   );
 
-  const formatCurrency = (value: number) => currencyFormatter.format(value);
+  const formatCurrency = (value: number): string =>
+    currencyFormatter.format(value);
 
-  // calculate the tax band details
+  // Calculate the tax band details
   const calculatedTaxDetails = useMemo(() => {
     let remainingSalary = Number(annualIncome);
     let taxAcc = 0;
@@ -59,7 +63,7 @@ const TaxDisplay = ({ taxBrackets, annualIncome }: TaxDisplayProps) => {
       const bandMax = band.max ?? Infinity;
       const taxableInBand = Math.min(remainingSalary, bandMax - bandMin);
 
-      //set the tax, rate, and range for each band and format them to use in Antd Table data source
+      // Set the tax, rate, and range for each band and format them to use in Antd Table data source
       if (taxableInBand > 0) {
         const taxInBand = taxableInBand * band.rate;
         taxAcc += taxInBand;
@@ -80,7 +84,7 @@ const TaxDisplay = ({ taxBrackets, annualIncome }: TaxDisplayProps) => {
     return { totalTax: taxAcc, bandDetails: bandBreakdown, effectiveRate };
   }, [annualIncome, taxBrackets]);
 
-  // early return when annualIncome is empty or smaller than 0
+  // Early return when annualIncome is empty or smaller than 0
   if (annualIncome === "" || Number(annualIncome) <= 0) {
     return null;
   }

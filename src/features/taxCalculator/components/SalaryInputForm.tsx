@@ -3,6 +3,7 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
+  JSX,
 } from "react";
 import { Button, Form, Input, Select, notification } from "antd";
 import type { FormProps } from "antd";
@@ -25,12 +26,15 @@ const SalaryInputForm = ({
   setAnnualIncome,
   setSubmitForm,
   submitForm,
-}: SalaryInputFormProps) => {
+}: SalaryInputFormProps): JSX.Element => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
   const [api, contextHolder] = notification.useNotification();
 
-  const selectOptions = useMemo(() => ["2019", "2020", "2021", "2022"], []);
+  const selectOptions: string[] = useMemo(
+    () => ["2019", "2020", "2021", "2022"],
+    []
+  );
 
   const incomeInputRules = useMemo(
     () => [
@@ -62,7 +66,7 @@ const SalaryInputForm = ({
         const { income, year } = values;
         if (income && year) {
           setAnnualIncome(income);
-          const taxRates = await getTaxRates(year);
+          const taxRates: TaxBracketsType | null = await getTaxRates(year);
           if (taxRates) {
             setTaxBrackets(taxRates);
           }
