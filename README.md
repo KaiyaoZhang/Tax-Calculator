@@ -20,7 +20,7 @@ This is a sample React application built with TypeScript for calculating the fed
 - Framework: React.js(v18.3.1)
 - UI Framework: Ant Design(v5.24.1)
 - CSS: SASS
-- Internationalization: i18n
+- Internationalization: i18next
 - API fetching: Axios
 - Unit Test: Jest, React-Testing-Lib
 - Auto Testing: Added Husky and github workflow for auto testing 
@@ -38,6 +38,9 @@ This is a sample React application built with TypeScript for calculating the fed
    ```bash
    npm install --legacy-peer-deps
    ```
+   The CRA(create-react-app) TypeScript comes with "react-scripts": "5.0.1" which only supports TypeScript 3.x or 4.x,
+   BUT [i18next](https://www.i18next.com/overview/typescript)  requires TypeScript v5 . I upgraded the TypeScript to v5. So when install the dependencies need add ```--legacy-peer-deps``` to ignore peer dependency conflicts.
+
 
    Or
 
