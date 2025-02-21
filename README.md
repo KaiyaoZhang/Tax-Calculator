@@ -1,46 +1,112 @@
-# Getting Started with Create React App
+# Income Tax Calculator (React + TypeScript)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a sample React application built with TypeScript for calculating the federal income tax based on user input for a selected year. The application computes total taxes owed for the salary, taxes owed per band, and a  effective rate based on the year the user selects.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User-friendly interface to input income and select the tax year
 
-### `npm start`
+- Tax calculation based on the provided income and year
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Responsive and interactive UI built with React and TypeScript
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Internationalization (i18n) integrated and easier to support multi language when need in the future 
 
-### `npm test`
+- Modular and clean component-based architecture, it's easier to handle the project's scalability and maintainability
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+- Programming language: TypeScript
+- Framework: React.js(v18.3.1)
+- UI Framework: Ant Design(v5.24.1)
+- CSS: SASS
+- Internationalization: i18n
+- API fetching: Axios
+- Unit Test: Jest, React-Testing-Lib
+- Auto Testing: Added Husky and github workflow for auto testing 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository:**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   git clone https://github.com/KaiyaoZhang/Tax-Calculator.git
+   ```
 
-### `npm run eject`
+2. **Install dependencies:**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Or
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   ```bash
+   yarn install
+   ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. **Start the development server:**
 
-## Learn More
+   ```bash
+   npm start
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   Or
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+   yarn start
+   ```
+
+The app will run at [`http://localhost:3000/`](http://localhost:3000/).
+
+## Folder Structure
+
+```
+src
+├── apis                # api call setup including Axios instance setup
+├── features            # all the feature pages inside it
+    -taxCalculator
+        -__test__       # Unit tests for tax Calculator
+        -components     # tax calculator components
+        -index.module.scss # tax calculator styles
+        -index.tsx      # tax calculator index page
+        -types.ts       # types used inside tax calculator
+├── styles              # Gloabl styles like responsive breakpoints
+├── testWrappers        # Unit test wrapper functions
+├── App.tsx             # Root component
+└── index.tsx           # Entry point
+```
+
+## Testing
+
+To run tests:
+
+```bash
+npm test
+```
+
+Or
+
+```bash
+yarn test
+```
+
+
+## Build
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+Or
+
+```bash
+yarn build
+```
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

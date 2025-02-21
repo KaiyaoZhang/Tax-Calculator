@@ -1,0 +1,19 @@
+{
+  "welcome": "Calculateur d'impôts",
+  "income": "Revenu Annuel",
+  "income_validate_empty": "Veuillez saisir votre revenu annuel !",
+  "income_validate_number": "Veuillez entrer un nombre !",
+  "income_validate_greater_than_zero": "Le revenu doit être supérieur à 0",
+  "year": "Année Fiscale",
+  "year_validate_empty": "Veuillez sélectionner votre année fiscale !",
+  "year_placeholder": "Sélectionner l'année fiscale",
+  "submit": "Soumettre",
+  "notification": "Notification",
+  "APIError": "Échec de la récupération des taux d'imposition. Veuillez réessayer plus tard.",
+  "totalTaxes": "Impôts Totaux {{totalTaxes}}",
+  "tax_break_down_table": "Tableau de Répartition des Impôts :",
+  "table_col_income_range": "Tranche de Revenu",
+  "table_col_tax_rate": "Taux d'Imposition",
+  "table_col_tax_owed": "Impôt Dû",
+  "effectiveRate": "Taux Effectif : {{effectiveRate}}"
+}

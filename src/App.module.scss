@@ -1,0 +1,13 @@
+@use "./styles/mixins" as m;
+
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@include m.mob-breakpoint {
+    .App {
+        padding: 0px 16px;
+    }
+}
