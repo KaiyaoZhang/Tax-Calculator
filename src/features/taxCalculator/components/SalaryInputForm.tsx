@@ -30,31 +30,40 @@ const SalaryInputForm = ({
     []
   );
 
- const incomeInputRules = useMemo(
-   () => [
-     {
-       required: true,
-       message: t("income_validate_empty"), // Validation: Field cannot be empty
-     },
-     {
-       pattern: /^\d+(\.\d{1,2})?$/,
-       message: t("income_validate_number"), // Validation: Must be a valid number (up to two decimal places)
-     },
-     {
-       validator: (_: unknown, value: string) => {
-         if (!value || parseFloat(value) > 0) {
-           return Promise.resolve();
-         }
-         return Promise.reject(
-           new Error(t("income_validate_greater_than_zero"))
-         );
-       },
-       // Validation: Must be greater than 0
-     },
-   ],
-   [t]
- );
+  const incomeInputRules = useMemo(
+    () => [
+      {
+        required: true,
+        message: t("income_validate_empty"), // Validation: Field cannot be empty
+      },
+      {
+        validator: (_: unknown, value: string) => {
+          // If input is empty, skip validation (handled by required rule)
+          if (!value) return Promise.resolve();
 
+          // Check if the number is greater than 0
+          if (parseFloat(value) < 0) {
+            return Promise.reject(
+              new Error(t("income_validate_greater_than_zero"))
+            );
+          }
+
+          // Check if the value is a valid number
+          if (!/^\d+(\.\d+)?$/.test(value)) {
+            return Promise.reject(new Error(t("income_validate_number")));
+          }
+
+          // Check if the number has more than two dicimal
+          if (!/^\d+(\.\d{1,2})?$/.test(value)) {
+            return Promise.reject(new Error(t("income_validate_two_decimals")));
+          }
+
+          return Promise.resolve(); // Validation passed
+        },
+      },
+    ],
+    [t]
+  );
 
   const yearSelectRules = useMemo(
     () => [{ required: true, message: t("year_validate_empty") }], // Validation: Tax year cannot be empty
@@ -67,9 +76,9 @@ const SalaryInputForm = ({
       try {
         const { income, year } = values;
         if (income && year) {
-          setAnnualIncome(income);
           const taxRates: TaxBracketsType | null = await getTaxRates(year);
           if (taxRates) {
+            setAnnualIncome(income);
             setTaxBrackets(taxRates);
           }
         }

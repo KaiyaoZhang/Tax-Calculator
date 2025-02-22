@@ -51,6 +51,20 @@ describe("Salary input iorm page", () => {
     setSubmitForm: jest.fn(),
     submitForm: false,
   };
+
+  const taxYearSelect = () => {
+    fireEvent.mouseDown(screen.getByText(t("year_placeholder")));
+    fireEvent.click(screen.getByTestId("select_option_2022"));
+  };
+
+  const apiNotBeenCalled = async () => {
+    fireEvent.click(screen.getByText(t("submit")));
+
+    await waitFor(() => {
+      expect(getTaxRates).not.toHaveBeenCalled();
+    }); 
+  };
+
   it("renders the form inputs and submit button", () => {
     const { container } = render(
       <I18nextProvider i18n={i18nTestConfig}>
@@ -73,9 +87,7 @@ describe("Salary input iorm page", () => {
       target: { value: "50000" },
     });
 
-    fireEvent.mouseDown(screen.getByText(t("year_placeholder")));
-
-    fireEvent.click(screen.getByTestId("select_option_2022"));
+    taxYearSelect();
 
     fireEvent.click(screen.getByText(t("submit")));
 
@@ -100,9 +112,7 @@ describe("Salary input iorm page", () => {
       target: { value: "50000" },
     });
 
-    fireEvent.mouseDown(screen.getByText(t("year_placeholder")));
-
-    fireEvent.click(screen.getByTestId("select_option_2022"));
+    taxYearSelect();
 
     fireEvent.click(screen.getByText(t("submit")));
 
@@ -115,13 +125,55 @@ describe("Salary input iorm page", () => {
     consoleErrorSpy.mockRestore(); // Restore console.error after the test
   });
 
-  it('it should not sumbit the form when there are validation fails', async () => {
-    render(<SalaryInputForm {...salaryInputFormProps}/>);
+  it("it should not sumbit the form when there are validation fails (the input number has more than 2 dicimal)", async () => {
+    render(<SalaryInputForm {...salaryInputFormProps} />);
 
-    fireEvent.click(screen.getByText(t("submit")));
-
-    await waitFor(() => {
-      expect(getTaxRates).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByTestId("income_input"), {
+      target: { value: "50000.256" },
     });
-  })
+
+    taxYearSelect();
+
+    apiNotBeenCalled();
+  });
+
+  it("it should not sumbit the form when there are validation fails (the input number is smaller than 0)", async () => {
+    render(<SalaryInputForm {...salaryInputFormProps} />);
+
+    fireEvent.change(screen.getByTestId("income_input"), {
+      target: { value: "-50000" },
+    });
+
+    taxYearSelect();
+
+    apiNotBeenCalled();
+  });
+
+  it("it should not sumbit the form when there are validation fails (the input number value is not a number)", async () => {
+    render(<SalaryInputForm {...salaryInputFormProps} />);
+
+    fireEvent.change(screen.getByTestId("income_input"), {
+      target: { value: "hello world!" },
+    });
+
+    taxYearSelect();
+
+    apiNotBeenCalled();
+  });
+
+  it("it should not sumbit the form when there are validation fails (There is no tax year selected)", async () => {
+    render(<SalaryInputForm {...salaryInputFormProps} />);
+
+    fireEvent.change(screen.getByTestId("income_input"), {
+      target: { value: "50000" },
+    });
+
+    apiNotBeenCalled();
+  });
+
+  it("it should not sumbit the form when there are validation fails (when both annual income and tax year are empty)", async () => {
+    render(<SalaryInputForm {...salaryInputFormProps} />);
+
+    apiNotBeenCalled();
+  });
 });
