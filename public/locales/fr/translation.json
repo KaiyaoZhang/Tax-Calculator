@@ -10,6 +10,7 @@
   "year_placeholder": "Sélectionner l'année fiscale",
   "submit": "Soumettre",
   "notification": "Notification",
+  "APIServerError": "Erreur du serveur, veuillez réessayer plus tard",
   "APIError": "Échec de la récupération des taux d'imposition. Veuillez réessayer plus tard.",
   "totalTaxes": "Impôts Totaux {{totalTaxes}}",
   "tax_break_down_table": "Tableau de Répartition des Impôts :",
