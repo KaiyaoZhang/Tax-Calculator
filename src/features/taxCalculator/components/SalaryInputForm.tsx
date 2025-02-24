@@ -84,6 +84,7 @@ const SalaryInputForm = ({
           }
         }
       } catch (e) {
+        setTaxBrackets({ tax_brackets: [] });
         //Handle the API error
         if (e instanceof AxiosError) {
           const error = e as AxiosError;
@@ -105,7 +106,6 @@ const SalaryInputForm = ({
                 description: t("APIError"),
               });
           }
-          setTaxBrackets({ tax_brackets: [] });
         }
       } finally {
         setSubmitForm(false);
