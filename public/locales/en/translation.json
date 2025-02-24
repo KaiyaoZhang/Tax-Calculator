@@ -10,6 +10,7 @@
   "year_placeholder": "Select tax year",
   "submit": "Submit",
   "notification": "Notification",
+  "APIServerError": "Server Error, Please try again later",
   "APIError": "Failed to fetch tax rates. Please try again later.",
   "totalTaxes": "Total Taxes: {{totalTaxes}}",
   "tax_break_down_table": "Tax Breakdown table:",

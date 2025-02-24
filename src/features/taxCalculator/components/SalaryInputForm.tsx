@@ -1,5 +1,6 @@
 import { useMemo, Dispatch, SetStateAction, useCallback, JSX } from "react";
 import { Button, Form, Input, Select, notification } from "antd";
+import { AxiosError } from "axios";
 import type { FormProps } from "antd";
 import { useTranslation } from "react-i18next";
 import { getTaxRates } from "../../../apis";
@@ -83,13 +84,29 @@ const SalaryInputForm = ({
           }
         }
       } catch (e) {
-        //Handle the API error
-        api["error"]({
-          message: t("notification"),
-          description: t("APIError"),
-        });
         setTaxBrackets({ tax_brackets: [] });
-        console.error("API Error:", e);
+        //Handle the API error
+        if (e instanceof AxiosError) {
+          const error = e as AxiosError;
+          const status = error.response?.status;
+
+          switch (status) {
+            case 500:
+              api["error"]({
+                message: t("notification"),
+                description: t("APIServerError"),
+              });
+              break;
+
+            //Can add other error handler case here with different codes.
+
+            default:
+              api["error"]({
+                message: t("notification"),
+                description: t("APIError"),
+              });
+          }
+        }
       } finally {
         setSubmitForm(false);
       }
