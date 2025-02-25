@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { AxiosError } from "axios";
 import { I18nextProvider } from "react-i18next";
 import i18nTestConfig from "../../../testWrappers/i18nTestConfig";
 import { TaxBracketsType } from "../types";
@@ -62,7 +63,7 @@ describe("Salary input iorm page", () => {
 
     await waitFor(() => {
       expect(getTaxRates).not.toHaveBeenCalled();
-    }); 
+    });
   };
 
   it("renders the form inputs and submit button", () => {
@@ -99,15 +100,23 @@ describe("Salary input iorm page", () => {
     });
   });
 
-  it("submits the form with valid input but API fails", async () => {
+  it("submits the form with valid input but API returns 500 error", async () => {
+    // Spy on console.error to prevent test pollution
     const consoleErrorSpy = jest
       .spyOn(console, "error")
-      .mockImplementation(() => {}); // Suppress console.error
+      .mockImplementation(() => {});
 
-    (getTaxRates as jest.Mock).mockRejectedValue(new Error("API Error"));
+    // Mock API failure with 500 error
+    (getTaxRates as jest.Mock).mockRejectedValueOnce(
+      new AxiosError("API Error", "500", undefined, undefined, {
+        status: 500,
+        statusText: "Internal Server Error",
+      } as any)
+    );
 
     render(<SalaryInputForm {...salaryInputFormProps} />);
 
+    // Simulate user input
     fireEvent.change(screen.getByTestId("income_input"), {
       target: { value: "50000" },
     });
@@ -116,13 +125,18 @@ describe("Salary input iorm page", () => {
 
     fireEvent.click(screen.getByText(t("submit")));
 
+    // Ensure setTaxBrackets is called with an empty tax_brackets array on API failure
     await waitFor(() => {
       expect(salaryInputFormProps.setTaxBrackets).toHaveBeenCalledWith({
         tax_brackets: [],
       });
     });
 
-    consoleErrorSpy.mockRestore(); // Restore console.error after the test
+    // Ensure error message is displayed
+    expect(screen.getByText(t("APIServerError"))).toBeInTheDocument();
+
+    // Restore console.error
+    consoleErrorSpy.mockRestore();
   });
 
   it("it should not sumbit the form when there are validation fails (the input number has more than 2 dicimal)", async () => {

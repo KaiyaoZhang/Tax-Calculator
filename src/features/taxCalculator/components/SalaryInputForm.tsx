@@ -88,7 +88,7 @@ const SalaryInputForm = ({
         //Handle the API error
         if (e instanceof AxiosError) {
           const error = e as AxiosError;
-          const status = error.response?.status;
+          const status = error.status;
 
           switch (status) {
             case 500:
