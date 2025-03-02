@@ -1,5 +1,6 @@
 import { JSX, useMemo } from "react";
 import { Table, Typography } from "antd";
+import { currencyFormatter } from "../../../shared/utils";
 import type { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { TaxBracketsType, BandTaxTableRowType } from "../types";
@@ -35,15 +36,6 @@ const TaxDisplay = ({
       },
     ],
     [t]
-  );
-
-  const currencyFormatter = useMemo(
-    () =>
-      new Intl.NumberFormat("en-CA", {
-        style: "currency",
-        currency: "CAD",
-      }),
-    []
   );
 
   const formatCurrency = (value: number): string =>
