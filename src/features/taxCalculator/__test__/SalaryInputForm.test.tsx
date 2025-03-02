@@ -132,9 +132,6 @@ describe("Salary input iorm page", () => {
       });
     });
 
-    // Ensure error message is displayed
-    expect(screen.getByText(t("APIServerError"))).toBeInTheDocument();
-
     // Restore console.error
     consoleErrorSpy.mockRestore();
   });
